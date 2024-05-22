@@ -50,7 +50,7 @@
 
 ### Class Participation and Management
 
-**Safwan Kh:** We are focusing on individual levels now. Don't feel pressured; you are doing fine. Rene, please meet me after lunch in a breakout room to discuss your situation. Remember, joining the class means more than just having your name on the list. Please do the exercises and assessments. Your results are visible to everyone, including the management.
+**Safwan Kh:** We are focusing on individual levels now. Don't feel pressured; you are doing fine. Rene, please meet me after lunch in a breakout room to discuss your situation. Remember, joining the class means more than just having your name on the list. Please do the exercises and assessments. Your results are visible to the management.
 
 
 
