@@ -89,29 +89,50 @@ The meeting focused on implementing a password reset feature and integrating a c
 ### Live Coding Example
 
 ```java
+package com.example.expensetracker.service;
+
+import java.util.List;
+import java.util.stream.Collectors;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+import java.util.Map;
+import java.util.Set;
+
 @Service
 public class CurrencyConverterService {
+  @Value("${exchangerate.api.key}")
+  private String apiKey;
 
-    @Value("${rate.api.key}")
-    private String apiKey;
+  private final RestTemplate restTemplate = new RestTemplate();
 
-    private final RestTemplate restTemplate = new RestTemplate();
-
-    public CurrencyConverterService() {
-        // Constructor
+  public double convert(String fromCurrency, String toCurrency, double amount) {
+    String urlString = String.format(
+        "https://v6.exchangerate-api.com/v6/%s/pair/%s/%s",
+        apiKey, fromCurrency, toCurrency
+    );
+    Map<String, Object> response = restTemplate.getForObject(urlString, Map.class);
+    if (response != null && response.get("conversion_rate") != null) {
+      double conversionRate = (double) response.get("conversion_rate");
+      return amount * conversionRate;
     }
+    throw new RuntimeException("Failed to get conversion rate");
+  }
 
-    public ConversionResponse convertCurrency(String from, String to, double amount) {
-        String url = String.format("https://api.exchangerate-api.com/v4/latest/%s?apikey=%s", from, apiKey);
-        ResponseEntity<ConversionResponse> response = restTemplate.getForEntity(url, ConversionResponse.class);
-        ConversionResponse conversionResponse = response.getBody();
-        if (conversionResponse != null) {
-            double rate = conversionResponse.getRates().get(to);
-            double convertedAmount = rate * amount;
-            return new ConversionResponse(from, to, rate, amount, convertedAmount);
-        }
-        throw new RuntimeException("Failed to convert currency");
+  public Set<String> getSupportedCurrencies() {
+    String urlString = String.format(
+        "https://v6.exchangerate-api.com/v6/%s/codes",
+        apiKey
+    );
+    Map<String, Object> response = restTemplate.getForObject(urlString, Map.class);
+    if (response != null && response.get("supported_codes") != null) {
+      return ((List<List<String>>) response.get("supported_codes")).stream()
+          .map(code -> code.get(0))
+          .collect(Collectors.toSet());
     }
+    throw new RuntimeException("Failed to get supported currencies");
+  }
 }
 ```
 
