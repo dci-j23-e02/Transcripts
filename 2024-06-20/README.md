@@ -4,7 +4,7 @@
 
 1. **Introduction and Attendees**
    - The meeting started with a list of attendees and a brief introduction.
-   - Key Attendees: Ahmad Sharif, Chizuru Yamauchi, Ioannis Laventzakis, Michelle Janer, Mikel Bano, Muyang Zander, Rene Heyer, Safwan Kh, Shoghik Kachatryan, Terissa Gwendjo, Youssef ElKhoury, Zuehre Turhan.
+   - Attendees: Ahmad Sharif, Chizuru Yamauchi, Ioannis Laventzakis, Michelle Janer, Mikel Bano, Muyang Zander, Rene Heyer, Safwan Kh, Shoghik Kachatryan, Terissa Gwendjo, Youssef ElKhoury, Zuehre Turhan.
 
 2. **Password Reset Feature**
    - Discussion on implementing a password reset feature.
